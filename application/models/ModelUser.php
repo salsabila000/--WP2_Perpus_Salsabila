@@ -26,7 +26,6 @@ class ModelUser extends CI_Model
     } 
  
  
- 
     public function getUserLimit()     
     {         
         $this->db->select('*');         
