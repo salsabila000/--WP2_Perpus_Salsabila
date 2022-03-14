@@ -27,10 +27,10 @@ class Autentifikasi extends CI_Controller
         } else {            
              $this->_login();         
             }     
-        } 
+        
     }
  
-    private function cek_login()     
+    private function _login()     
     {         
         $email = htmlspecialchars($this->input->post('email', true));         
         $password = $this->input->post('password', true); 
@@ -69,9 +69,15 @@ class Autentifikasi extends CI_Controller
             } else {             
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Email tidak terdaftar!!</div>');             
                 redirect('autentifikasi');         
-            }     
+        }     
     } 
- 
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah Logout!!</div>');
+    }
 
     public function blok()     
     {         
@@ -136,7 +142,7 @@ class Autentifikasi extends CI_Controller
                 //menggunakan model                        
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Selamat!! akun member anda sudah dibuat. Silahkan Aktivasi Akun anda</div>');             
                 redirect('autentifikasi');         
-            }     
+               
         }
     }
 }
